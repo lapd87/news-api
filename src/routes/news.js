@@ -17,6 +17,30 @@ const router = new Router();
  *   get:
  *     summary: Retrieve a list of news articles
  *     tags: [News]
+ *     parameters:
+ *       - in: query
+ *         name: filterBy
+ *         schema:
+ *           type: string
+ *           enum: [date, title]
+ *         description: The field to filter by.
+ *       - in: query
+ *         name: filterValue
+ *         schema:
+ *           type: string
+ *         description: The value to filter with.
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           enum: [date, title]
+ *         description: The field to sort by.
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *         description: The order to sort.
  *     responses:
  *       200:
  *         description: A list of news articles
