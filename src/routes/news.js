@@ -1,5 +1,6 @@
 const Router = require('koa-router');
 const newsController = require('../controllers/news');
+const {validator, newsSchema, querySchema, paramsSchema} = require('../middlewares/validation');
 
 
 const router = new Router();
@@ -36,7 +37,7 @@ const router = new Router();
  *           enum: [date, title]
  *         description: The field to sort by.
  *       - in: query
- *         name: order
+ *         name: sortOrder
  *         schema:
  *           type: string
  *           enum: [asc, desc]
@@ -63,7 +64,7 @@ const router = new Router();
  *                   text:
  *                     type: string
  */
-router.get('/news', newsController.getAllNews);
+router.get('/news',validator(querySchema, 'query'), newsController.getAllNews);
 
 /**
  * @swagger
@@ -100,7 +101,7 @@ router.get('/news', newsController.getAllNews);
  *       404:
  *         description: News article not found
  */
-router.get('/news/:id', newsController.getNewsById);
+router.get('/news/:id', validator(paramsSchema,'params'),newsController.getNewsById);
 
 /**
  * @swagger
@@ -146,7 +147,7 @@ router.get('/news/:id', newsController.getNewsById);
  *       400:
  *         description: Bad request
  */
-router.post('/news', newsController.createNews);
+router.post('/news', validator(newsSchema, 'body'), newsController.createNews);
 
 /**
  * @swagger
@@ -201,7 +202,7 @@ router.post('/news', newsController.createNews);
  *       404:
  *         description: News article not found
  */
-router.put('/news/:id', newsController.updateNews);
+router.put('/news/:id',validator(newsSchema, 'body'), newsController.updateNews);
 
 /**
  * @swagger
@@ -222,7 +223,7 @@ router.put('/news/:id', newsController.updateNews);
  *       404:
  *         description: News article not found
  */
-router.delete('/news/:id', newsController.deleteNews);
+router.delete('/news/:id',validator(paramsSchema,'params'), newsController.deleteNews);
 
 
 module.exports = router;

@@ -32,11 +32,11 @@ async function getNewsById(ctx) {
 async function createNews(ctx) {
     const {date, title, shortDescription, text} = ctx.request.body;
 
-    if (!date || !title || !shortDescription || !text) {
-        ctx.status = 400;
-        ctx.body = {error: 'All fields are required'};
-        return;
-    }
+    // if (!date || !title || !shortDescription || !text) {
+    //     ctx.status = 400;
+    //     ctx.body = {error: 'All fields are required'};
+    //     return;
+    // }
 
     const news = await newsModel.createNews({date, title, shortDescription, text});
 
@@ -48,11 +48,11 @@ async function updateNews(ctx) {
     const {id} = ctx.params;
     const {date, title, shortDescription, text} = ctx.request.body;
 
-    if (!date || !title || !shortDescription || !text) {
-        ctx.status = 400;
-        ctx.body = {error: 'All fields are required'};
-        return;
-    }
+    // if (!date || !title || !shortDescription || !text) {
+    //     ctx.status = 400;
+    //     ctx.body = {error: 'All fields are required'};
+    //     return;
+    // }
 
     const news = await newsModel.updateNews(id, {date, title, shortDescription, text});
 
