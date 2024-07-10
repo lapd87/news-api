@@ -1,19 +1,19 @@
 const newsModel = require('../models/news');
 
 async function getAllNews(ctx) {
-    const {filterBy, filterValue, sortBy, order} = ctx.query;
+    const {filterBy, filterValue, sortBy, sortOrder} = ctx.query;
     const filter = {};
-    const sortOrder = {};
+    const order = {};
 
     if (filterBy && filterValue) {
         filter[filterBy] = new RegExp(filterValue, 'i');
     }
 
     if (sortBy) {
-        sortOrder[sortBy] = order === 'desc' ? -1 : 1;
+        order[sortBy] = sortOrder === 'desc' ? -1 : 1;
     }
 
-    ctx.body = await newsModel.getAllNews(filter, sortOrder);
+    ctx.body = await newsModel.getAllNews(filter, order);
 }
 
 async function getNewsById(ctx) {

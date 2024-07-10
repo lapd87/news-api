@@ -3,5 +3,6 @@ Dockerfile
 docker-compose.yml
 .env
 .git
+.idea
 .gitignore
 README.md
