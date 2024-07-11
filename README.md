@@ -4,6 +4,8 @@ A simple REST API for news using Node.js, Koa, and MongoDB.
 
 ## Requirements
 
+- Node.js
+- MongoDB
 - Docker
 - Docker Compose
 
@@ -23,6 +25,11 @@ A simple REST API for news using Node.js, Koa, and MongoDB.
    ```bash
     docker-compose up --build
     ```
+   or run the app locally
+   ```bash
+    npm start
+    ```
+   
 3. The API will be accessible at http://localhost:3000.
 
 ## API Endpoints

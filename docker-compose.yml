@@ -1,23 +1,25 @@
-version: '3.8'
-
 services:
   mongo:
     image: mongo
-    container_name: mongo
+    container_name: mongo_api
+    attach: false
     ports:
       - "27018:27017" # Using external port 27018
     volumes:
       - mongo-data:/data/db
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --eval 'db.runCommand({ ping: 1 })'" ]
 
   app:
     build: .
-    container_name: news-api
+    container_name: news_api
     environment:
       - MONGO_URI=mongodb://mongo:27017/news
     ports:
       - "3000:3000"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
 
 volumes:
   mongo-data:
